@@ -6,7 +6,7 @@
 
 from typing import List
 
-from llama_stack.providers.datatypes import Api, InlineProviderSpec, ProviderSpec
+from llama_stack.providers.datatypes import AdapterSpec, Api, InlineProviderSpec, ProviderSpec, remote_provider_spec
 
 
 def available_providers() -> List[ProviderSpec]:
@@ -24,5 +24,14 @@ def available_providers() -> List[ProviderSpec]:
                 Api.inference,
                 Api.agents,
             ],
+        ),
+        remote_provider_spec(
+            api=Api.eval,
+            adapter=AdapterSpec(
+                adapter_type="lmeval",
+                pip_packages=["kubernetes"],
+                module="llama_stack.providers.remote.eval.lmeval",
+                config_class="llama_stack.providers.remote.eval.lmeval.config.LMEvalEvalProviderConfig",
+            ),
         ),
     ]

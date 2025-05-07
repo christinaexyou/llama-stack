@@ -302,16 +302,16 @@ image_tag="$image_name:$version_tag"
 
 # Detect platform architecture
 ARCH=$(uname -m)
-if [ -n "$BUILD_PLATFORM" ]; then
-  CLI_ARGS+=("--platform" "$BUILD_PLATFORM")
-elif [ "$ARCH" = "arm64" ] || [ "$ARCH" = "aarch64" ]; then
-  CLI_ARGS+=("--platform" "linux/arm64")
-elif [ "$ARCH" = "x86_64" ]; then
-  CLI_ARGS+=("--platform" "linux/amd64")
-else
-  echo "Unsupported architecture: $ARCH"
-  exit 1
-fi
+# if [ -n "$BUILD_PLATFORM" ]; then
+#   CLI_ARGS+=("--platform" "$BUILD_PLATFORM")
+# elif [ "$ARCH" = "arm64" ] || [ "$ARCH" = "aarch64" ]; then
+#   CLI_ARGS+=("--platform" "linux/arm64")
+# elif [ "$ARCH" = "x86_64" ]; then
+CLI_ARGS+=("--platform" "linux/amd64")
+# else
+#   echo "Unsupported architecture: $ARCH"
+#   exit 1
+# fi
 
 echo "PWD: $(pwd)"
 echo "Containerfile: $TEMP_DIR/Containerfile"
